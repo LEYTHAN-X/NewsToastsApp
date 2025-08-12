@@ -1,0 +1,102 @@
+.about-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-content {
+    text-align: center;
+    color: #ffffff;
+    padding: 2rem;
+    max-width: 900px;
+    z-index: 10;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.about-title {
+    font-size: 4rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 10px #00ffff;
+    /* reduced glow */
+    animation: glowPulse 3s infinite alternate;
+}
+
+
+.about-text {
+    font-size: 1.8rem;
+    font-family: 'Dancing Script', cursive;
+    line-height: 1.6;
+    margin-top: 1rem;
+    color: #e0e0e0;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+/* Star layers for parallax */
+.stars,
+.stars2,
+.stars3 {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-repeat: repeat;
+    background-size: contain;
+    animation: starMove 100s linear infinite;
+}
+
+.stars {
+    background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    opacity: 0.5;
+}
+
+.stars2 {
+    background-image: url("https://www.transparenttextures.com/patterns/tiny-crosses.png");
+    opacity: 0.3;
+    animation-duration: 150s;
+}
+
+.stars3 {
+    background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+    opacity: 0.2;
+    animation-duration: 200s;
+}
+
+@keyframes starMove {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-1000px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 4px #00ffff, 0 0 8px #00ffff;
+    }
+
+    100% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    }
+}

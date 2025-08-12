@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import News from './components/News';
+import About from './components/About'; // ✅ Import your About component
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import LoadingBar from "react-top-loading-bar";
 
@@ -42,7 +43,10 @@ const App = () => {
           <Route exact path="/science" element={<News apikey={apikey} setProgress={setProgress} key="science" pageSize={8} country="us" category="science" />} />
           <Route exact path="/sports" element={<News apikey={apikey} setProgress={setProgress} key="sports" pageSize={8} country="us" category="sports" />} />
           <Route exact path="/technology" element={<News apikey={apikey} setProgress={setProgress} key="technology" pageSize={8} country="us" category="technology" />} />
-          <Route path="/about" element={<div>About Page Placeholder</div>} />
+          
+          {/* ✅ Updated to use About component */}
+          <Route path="/about" element={<About />} />
+
           <Route path="/general" element={<News apikey={apikey} setProgress={setProgress} key="general" pageSize={8} country="us" category="general" />} />
         </Routes>
       </Router>
