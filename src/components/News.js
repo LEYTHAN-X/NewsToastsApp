@@ -62,23 +62,26 @@ const News = (props) => {
     };
 
     return (
-        <div className="container my-3">
-            <h1 className="text-center" style={{ margin: '35px 0px', marginTop: '90px' }}>
+        <div className="container mx-auto px-4 py-6">
+            <h1 className={`text-center mt-24 mb-8 text-3xl font-bold font-cursive-dancing transition-all duration-300 ${props.category === 'entertainment'
+                    ? 'text-yellow-300'
+                    : 'text-gray-900'
+                }`}>
                 NewsToasts - Top {capitalizeFirstLetter(props.category)} Headlines
             </h1>
 
+
+
             {loading && (
-                <div className="text-center">
-                    <div className="spinner-border" role="status">
-                        <span className="visually-hidden">Loading...</span>
-                    </div>
+                <div className="flex justify-center">
+                    <div className="w-12 h-12 border-4 border-t-blue-500 border-gray-200 rounded-full animate-spin"></div>
                 </div>
             )}
 
-            <div className="row">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {articles && articles.length > 0 ? (
                     articles.map((element) => (
-                        <div className="col-md-3" key={element.url}>
+                        <div key={element.url}>
                             <NewsItem
                                 title={element.title ? element.title.slice(0, 45) : ''}
                                 description={element.description ? element.description : ''}
@@ -91,15 +94,15 @@ const News = (props) => {
                         </div>
                     ))
                 ) : (
-                    !loading && <p>No articles to display</p>
+                    !loading && <p className="text-center text-gray-500">No articles to display</p>
                 )}
             </div>
 
-            <div className="container d-flex justify-content-between">
+            <div className="flex justify-between mt-6">
                 <button
                     disabled={page <= 1 || loading}
                     type="button"
-                    className="btn btn-dark"
+                    className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     onClick={handlePrevClick}
                 >
                     &larr; Previous
@@ -107,7 +110,7 @@ const News = (props) => {
                 <button
                     disabled={page + 1 > Math.ceil(totalResults / props.pageSize) || loading}
                     type="button"
-                    className="btn btn-dark"
+                    className="bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     onClick={handleNextClick}
                 >
                     Next &rarr;

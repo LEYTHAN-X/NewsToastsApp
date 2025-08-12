@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import News from './components/News';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
@@ -8,8 +8,26 @@ import LoadingBar from "react-top-loading-bar";
 const App = () => {
   const apikey = process.env.REACT_APP_NEWS_API;
   const [progress, setProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   return (
-    <div>
+    <div className="relative">
+      <div 
+        className="mouse-glow" 
+        style={{ 
+          transform: `translate(${mousePosition.x - 10}px, ${mousePosition.y - 10}px)` 
+        }} 
+      />
       <Router>
         <NavBar />
         <LoadingBar
@@ -24,8 +42,6 @@ const App = () => {
           <Route exact path="/science" element={<News apikey={apikey} setProgress={setProgress} key="science" pageSize={8} country="us" category="science" />} />
           <Route exact path="/sports" element={<News apikey={apikey} setProgress={setProgress} key="sports" pageSize={8} country="us" category="sports" />} />
           <Route exact path="/technology" element={<News apikey={apikey} setProgress={setProgress} key="technology" pageSize={8} country="us" category="technology" />} />
-
-          {/* Placeholder Routes */}
           <Route path="/about" element={<div>About Page Placeholder</div>} />
           <Route path="/general" element={<News apikey={apikey} setProgress={setProgress} key="general" pageSize={8} country="us" category="general" />} />
         </Routes>
